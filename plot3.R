@@ -42,9 +42,9 @@ library(dplyr)
         weekday <- wday(date, label=TRUE, abbr=TRUE)
 
         with(dataPlotTarget, plot(date, Global_active_power, type="l"))
-        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_1>0), points(date, Sub_metering_1, col="black"))
-        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_2>0), points(date, Sub_metering_2, col="blue"))
-        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_3>0), points(date, Sub_metering_3, col="red"))
+        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_1>0), points(date, Sub_metering_1, col="black", type="l"))
+        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_2>0), points(date, Sub_metering_2, col="red", type="l"))
+        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_3>0), points(date, Sub_metering_3, col="blue", type="l"))
                   
 ##        dataPlotTarget$Global_active_power <- as.numeric (dataPlotTarget$Global_active_power)
 
