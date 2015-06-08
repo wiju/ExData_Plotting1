@@ -40,12 +40,15 @@ library(dplyr)
         dataPlotTarget <- dataPlotTarget[ , c(1, 3:9)]
         date <- dataPlotTarget$Date
         weekday <- wday(date, label=TRUE, abbr=TRUE)
+        
+        ## connect to png device
+        png(filename="./plot2.png", width=480, height=480, units="px")
+        ## plot
+        with(dataPlotTarget, plot(date, Global_active_power, type="l", xlab="", 
+                                  ylab="Global_active_power (kilowatts)"))
+        ## close connect to png device
+        dev.off()
 
-        with(dataPlotTarget, plot(date, Global_active_power, type="l"))
-
-##        dataPlotTarget$Global_active_power <- as.numeric (dataPlotTarget$Global_active_power)
-
-##        hist(dataPlotTarget$Global_active_power, freq=TRUE, col="red")
 
 ## print(head(dataPlotTarget[1:4], n=5))     ## test
 ## print(tail(dataPlotTarget[1:4], n=5))     ## test

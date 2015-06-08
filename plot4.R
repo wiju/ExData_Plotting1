@@ -45,12 +45,15 @@ library(dplyr)
         plotLayout <- c(2,2)
         innerMargins <- c(5,4,2,2)
         outerMargins <- c(2,2,2,2)
+
+        ## open connection to png file device
         png(filename="./plot4.png", width=480, height=480, units="px")
         par(mfcol=plotLayout, mar=innerMargins, oma=outerMargins)
 
 
         ## First plot in layout - same as Prog Assignment 1 - Plot 2
-        with(dataPlotTarget, plot(date, Global_active_power, type="l", xlab=""))
+        with(dataPlotTarget, plot(date, Global_active_power, type="l", xlab="", 
+                                  ylab="Global Active Power"))
 
         ## Second plot in layout - same as Prog Assignment 1 - Plot 3
         with(dataPlotTarget, plot(date, Sub_metering_1, type="n", xlab="", ylab="Energy sub metering"))
@@ -69,8 +72,9 @@ library(dplyr)
         ## Fourth plot in layout
         with(dataPlotTarget, plot(date, Global_reactive_power, type="l", xlab="date/time"))
 
-
+        ## close connection to png file device
         dev.off()
+
 ## print(head(dataPlotTarget[1:4], n=5))     ## test
 ## print(tail(dataPlotTarget[1:4], n=5))     ## test
 

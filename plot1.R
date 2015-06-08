@@ -41,7 +41,15 @@ library(dplyr)
 
         dataPlotTarget$Global_active_power <- as.numeric (dataPlotTarget$Global_active_power)
 
-        hist(dataPlotTarget$Global_active_power, freq=TRUE, col="red")
+        ## open connection to png file device
+        png(filename="./plot1.png", width=480, height=480, units="px")
+
+        ## plot histogram
+        hist(dataPlotTarget$Global_active_power, freq=TRUE, main="Global Active Power", 
+             col="red", xlab="Global_active_power (kilowatts)")
+
+        ## close connection to png file device
+        dev.off()
 
 ## print(head(dataPlotTarget[1:4], n=5))     ## test
 ## print(tail(dataPlotTarget[1:4], n=5))     ## test
