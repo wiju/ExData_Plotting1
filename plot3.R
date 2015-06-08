@@ -41,17 +41,19 @@ library(dplyr)
         date <- dataPlotTarget$Date
         weekday <- wday(date, label=TRUE, abbr=TRUE)
 
-##        mutate(dataPlotTarget, sumSubs=(Sub_metering_1 + Sub_metering_2 + Sub_metering_3)) 
+        lineColors <- c("black", "red", "blue")
+        png(filename="./plot3.png", width=480, height=480, units="px")
 
+        with(dataPlotTarget, plot(date, Sub_metering_1, type="n", xlab="", ylab="Energy sub metering"))
+        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_1>0), points(date, 
+                                        Sub_metering_1, col="black", type="l"))
+        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_2>0), points(date, 
+                                        Sub_metering_2, col="red", type="l"))
+        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_3>0), points(date, 
+                                        Sub_metering_3, col="blue", type="l"))
 
-
-        with(dataPlotTarget, plot(date, Sub_metering_1, type="n"))
-        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_1>0), points(date, Sub_metering_1, col="black", type="l"))
-        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_2>0), points(date, Sub_metering_2, col="red", type="l"))
-        with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_3>0), points(date, Sub_metering_3, col="blue", type="l"))
-
-        legend("topright", pch = 45, col=c("black", "red", "blue"), legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))                  
-
+        legend("topright", col=lineColors, lty=1,  cex=0.85, legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))                  
+        dev.off()
 ## print(head(dataPlotTarget[1:4], n=5))     ## test
 ## print(tail(dataPlotTarget[1:4], n=5))     ## test
 
