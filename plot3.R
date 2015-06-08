@@ -13,6 +13,7 @@ library(dplyr)
         
         dataPlotTotal <- data.frame()
         dataPlotTarget <- data.frame()
+        dataSubs <- vector()
 
         ## Read file
         fileUrl <- "./household_power_consumption.txt" 
@@ -32,7 +33,6 @@ library(dplyr)
         dataPlotTarget <- mutate(dataPlotTarget, Date = paste(Date, Time, sep=' ')) 
       
         ## Convert Date from text to date type
-
         dataPlotTarget$Date <- strptime(dataPlotTarget$Date, format="%d/%m/%Y %H:%M:%S", 
                                 tz="America/Los_Angeles")
 
@@ -41,14 +41,16 @@ library(dplyr)
         date <- dataPlotTarget$Date
         weekday <- wday(date, label=TRUE, abbr=TRUE)
 
-        with(dataPlotTarget, plot(date, Global_active_power, type="l"))
+##        mutate(dataPlotTarget, sumSubs=(Sub_metering_1 + Sub_metering_2 + Sub_metering_3)) 
+
+
+
+        with(dataPlotTarget, plot(date, Sub_metering_1, type="n"))
         with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_1>0), points(date, Sub_metering_1, col="black", type="l"))
         with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_2>0), points(date, Sub_metering_2, col="red", type="l"))
         with(subset(dataPlotTarget, dataPlotTarget$Sub_metering_3>0), points(date, Sub_metering_3, col="blue", type="l"))
-                  
-##        dataPlotTarget$Global_active_power <- as.numeric (dataPlotTarget$Global_active_power)
 
-##        hist(dataPlotTarget$Global_active_power, freq=TRUE, col="red")
+        legend("topright", pch = 45, col=c("black", "red", "blue"), legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))                  
 
 ## print(head(dataPlotTarget[1:4], n=5))     ## test
 ## print(tail(dataPlotTarget[1:4], n=5))     ## test
